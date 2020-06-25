@@ -1,0 +1,90 @@
+<!DOCTYPE html>{% load static %} {% load my_filter %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Инфляция в России</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    {% block content %}
+      <div class="row">
+        <h1 class="col s12">Инфляция в России</h1>
+        <div class="col s12 m8">
+
+
+
+        <!-- Ваша логика -->
+          <table>
+            <!-- title of the table -->
+            <tr>
+              {% for item in title %}
+                {% if item is title|last %}
+                  <th bgcolor="grey"> {{ item }} </th>
+                {% else %}
+                  <th>{{ item }}</th>
+                {% endif %}
+              {% endfor %}
+            </tr>
+
+            <!-- body of the table -->
+            <!-- First variant -->
+<!--            {% for row in body %}-->
+<!--              <tr>-->
+<!--                {% for item in row %}-->
+<!--                  {% if item %}-->
+<!--                    {% if item is row|last %}-->
+<!--                      <td bgcolor="grey">{{ item }}</td>-->
+<!--                    {% elif item > 1 and item < 2 %}-->
+<!--                      <td bgcolor="pink">{{ item }}</td>-->
+<!--                    {% elif item > 2 and item < 5 %}-->
+<!--                      <td bgcolor="ff6866">{{ item }}</td>-->
+<!--                    {% elif item > 5 %}-->
+<!--                      <td bgcolor="red">{{ item }}</td>-->
+<!--                    {% elif item < 0 %}-->
+<!--                      <td bgcolor="green">{{ item }}</td>-->
+<!--                    {% else %}-->
+<!--                      <td>{{ item }}</td>-->
+<!--                    {% endif %}-->
+<!--                  {% else %}-->
+<!--                    <td> </td>-->
+<!--                  {% endif %}-->
+<!--                {% endfor %}-->
+<!--              </tr>-->
+<!--            {% endfor %}-->
+
+
+            <!-- Second variant with own filter -->
+            <!-- body of the table -->
+            {% for row in body %}
+              <tr>
+                {% for item in row %}
+                  {% if item %}
+                    {% if item is row|last %}
+                      <td bgcolor="grey">{{ item }}</td>
+                    {% else %}
+                      <td style="background-color: {{ item|val2color }}">{{ item }}</td>
+                    {% endif %}
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            {% endfor %}
+
+          </table>
+
+
+
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>
